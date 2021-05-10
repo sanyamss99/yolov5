@@ -293,6 +293,7 @@ class autoShape(nn.Module):
             return Detections(imgs, y, files, t, self.names, x.shape)
 
 
+ #attention layers
 class ASFFV5(nn.Module):
     def __init__(self, level,out,multiplier=1, rfb=False, vis=False, act_cfg=True):
         """
