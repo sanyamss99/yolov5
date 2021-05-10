@@ -417,7 +417,7 @@ class ChannelAttentionModule(nn.Module):
             nn.Linear(in_features=mid_channel, out_features=c1)
         )
        # self.sigmoid = nn.Sigmoid()
-        self.act=SiLU()
+        self.act=nn.SiLU()
     def forward(self, x):
         avgout = self.shared_MLP(self.avg_pool(x).view(x.size(0),-1)).unsqueeze(2).unsqueeze(3)
         maxout = self.shared_MLP(self.max_pool(x).view(x.size(0),-1)).unsqueeze(2).unsqueeze(3)
@@ -427,7 +427,7 @@ class SpatialAttentionModule(nn.Module):
     def __init__(self):
         super(SpatialAttentionModule, self).__init__()
         self.conv2d = nn.Conv2d(in_channels=2, out_channels=1, kernel_size=7, stride=1, padding=3)
-        self.act=SiLU()
+        self.act=nn.SiLU()
     def forward(self, x):
         avgout = torch.mean(x, dim=1, keepdim=True)
         maxout, _ = torch.max(x, dim=1, keepdim=True)
